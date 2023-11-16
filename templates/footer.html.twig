@@ -1,0 +1,18 @@
+<footer>
+	<div>
+		<h2>{{ "information"|trans }}</h2>
+		<ul>
+			<li><a href="{{path('app_home')}}" title="{{ 'cgv'|trans }}" data-turbo="false">{{ "cgv"|trans }}</a></li>
+			<li><a href="{{path('app_home')}}" title="{{ 'mentions'|trans }}" data-turbo="false">{{ "mentions"|trans }}</a></li>
+			<li><a href="{{path('app_home')}}" title="{{ "politique_de_confidentialite"|trans }}" data-turbo="false">{{ "politique_de_confidentialite"|trans }}</a></li>
+			<li><a href="{{path('app_contact')}}" title="Contact" data-turbo="false">Contact</a></li>
+			<li><a href="{{path('app_home')}}" title="{{ 'mentions'|trans }}" data-turbo="false">{{ "conditions"|trans }}</a></li>
+			<li><a href="{{path('app_home')}}" title="{{ "remboursement"|trans }}" data-turbo="false">{{ "remboursement"|trans }}</a></li>
+		</ul>
+	</div>
+	<div>
+		<p>© 2023 -
+			<a href="{{path('app_home')}}" title={% if app.session.get('_locale') == 'fr' %}"Aller à la page d'accueil"{% else %}"Go to the home page"{% endif %} rel="noopener noreferrer">USAGI</a>
+		</p>
+	</div>
+</footer>

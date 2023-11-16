@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login - USAGI{% endblock %}
+
+{% block body %}
+
+<div class="loginForm grid-center">
+        <form wtx-context="F9633DD2-26C6-4DFE-9F51-782E99BAF9E9" action="{{ path('app_login') }}" method="post">
+            <h1>{{ "se_connecter"|trans }}</h1>
+            {% if error %}
+                    <div class="error">
+                    {% if error.message == "The presented password cannot be empty." %}
+                        {{"error_password_empty"|trans}}        
+                    {% elseif error.message == "The presented password is invalid." %}
+                        {{"error_password_incorrect"|trans}}
+                    {% elseif error.message == "Bad credentials." %}
+                        {{"error_password_incorrect"|trans}}
+                    {% endif %}
+                    </div>
+            {% endif %}
+            <div>
+                
+                <label for="floatingInput">
+                    <abbr title={{"required"|trans}}>*</abbr>
+                    {{ "email"|trans }}</label>
+                <input type="email" id="floatingInput" placeholder="name@example.com" name="_username" value="{{ last_username }}" wtx-context="9266AD13-73CF-4AAD-9825-EB51797FB461"> 
+            </div>
+            <div>
+                <label for="floatingPassword">
+                    <abbr title={{"required"|trans}}>*</abbr>
+                    {{ "password"|trans }}</label>
+                <input type="password" id="floatingPassword"  name="_password" wtx-context="54429CCF-9BCF-4C58-8ECA-63C3595A1866">
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <button data-turbo="false" type="submit" title="{{ "connexion"|trans }}" role="button">{{ "connexion"|trans }}</button>
+            <a href="{{path('app_register')}}" title="{{ "inscription"|trans }}" data-turbo="false" role="link">{{ "new_customer"|trans }}</a>
+        </form>   
+</div>
+{% endblock %}

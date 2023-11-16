@@ -1,0 +1,12 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Stat - USAGI{% endblock %}
+
+{% block body %}
+    <h1>{{'stats'|trans}}</h1>
+     <div style="height: 300px;">
+        {{ render_chart(chart) }}
+    </div>
+    
+{% endblock %}

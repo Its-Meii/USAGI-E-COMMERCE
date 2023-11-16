@@ -1,0 +1,29 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}USAGI{% endblock %}
+
+{% block body %}
+    {% if products %}  
+        <h2>{{ "les_5_derniers_produits"|trans }}</h2>
+        <ul class="grid-container">
+            {% for product in products|reverse |slice(0, 5) %}
+                <a href='{{path('app_product',{slug : product.slug})}}' title="{{product.name}}" style="text-decoration:none;" data-turbo="false">
+                <li class="productBox" data-aos="fade-up">
+                    <img src="{{ asset('uploads/' ~ product.photofront)}}" alt="vétement photo" height='300' width='300' class="productImg">
+                    <p class="productName">{{ (product.name)}}</p>
+                    {% if product.quantity == 0 %}
+                        <p>{{ "rupture_de_stock"|trans }}</p>
+                        {% else %}
+                        <p class="productPrice">{{ (product.price/100)| format_currency('EUR',locale= app.session.get('_locale'))}}</p>
+                    {% endif %}       
+                    
+                    
+                </li>
+                </a>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h4>{{ "aucun_produit_trouve"|trans }}</h4>
+    {% endif %}
+{% endblock %}

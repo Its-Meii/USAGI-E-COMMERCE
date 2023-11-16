@@ -1,0 +1,87 @@
+connexion : Connexion
+deconnexion: Se déconnecter
+inscription : Créer un compte
+ajouter_panier: Ajouter au panier
+rechercher: Rechercher
+menu: Menu
+produits: Tout les Produits
+panier: Panier
+filtrer: Trier par
+prix_croissant: Prix croissant
+prix_decroissant: Prix décroissant 
+appliquer: Appliquer
+modifier: Modifier
+quantite: Quantité
+aucun_produit_trouve: Aucun produit trouvé...
+commande_annule: Commande annulée
+commande_reussie: Commande réussie
+tout_les_produits: Tout les produits
+les_5_derniers_produits : Les 5 derniers produits
+rupture_de_stock : Rupture de stock
+information : Informations
+cgv : Conditions Générales de Vente
+mentions: Mentions légales Legal Notice
+politique_de_confidentialite : Politique de confidentialité
+conditions : Conditions d'utilisation
+remboursement : Politique de remboursement
+creer : Créer
+email : E-mail
+prenom : Prénom 
+nom : Nom
+telephone : Téléphone
+password : Mot de passe
+last_password : Ancien mot de passe
+new_password : Nouveau mot de passe
+repeat_password : Répéter le mot de passe
+repeat_new_password : Répéter le nouveau  mot de passe
+agree_terms : Accepter les conditions
+message_terms : Vous devez accepter nos conditions.
+message_password : Veuillez entrer un mot de passe.
+message_password_size : Votre mot de passe doit comporter au moins 6 caractères.
+message_repeat_password : Les mot de passe doivent correspondre.
+se_connecter : Veuillez vous connecter
+confirm : CONFIRMER
+error_password_empty : Le mot de passe présenté ne peut pas être vide.
+error_password_incorrect : Le mot de passe présenté n'est pas valide.
+error_login : Mauvaises informations d'identification.
+required : Champ requis
+new_customer : Vous êtes un nouveau client ? Inscrivez-vous !
+go_to_home : Aller à la page d'accueil
+low_stock : Stock faible - Dernière chance !
+taxes: Taxes incluses.
+start_shopping: Commencer vos achats
+cart_empty : VOTRE PANIER EST VIDE
+order_history : Historique des commandes
+change_password : Modifier mot de passe
+your_cart : VOTRE PANIER
+products : produit(s)
+back_to_shop : Retour à la boutique
+summary : SOMMAIRE
+delete_cart : SUPPRIMER LE PANIER
+checkout : VALIDER LE PANIER
+error_same_password : Le nouveau mot de passe est égale à l'ancien.
+error_last_password : Le dernier mot de passe est faux.
+success_password : Votre mot de passe a bien été modifier.
+history: Votre historique
+order : Commande
+show_details : Afficher les détails
+hello : Bonjour
+order_paid : Commande payée
+command_failed : Échec de la commande
+don-t_forget_these: Ne les oubliez pas...
+save_my_address : Enregister mon adresse
+send : Envoyer
+order_details : Détails de la commande
+error : Erreur
+go_to_the_home_page: Aller à la page d'accueil
+increase_quantity : Augmenter la quantité de
+reduce_quantity : Baisser la quantité de 
+stats : Les stats
+ca : Chiffre d'affaires mensuelle en €
+sav : Le support SAV est ouvert du lundi au vendredi et de 9h à 17h. Nos délais de réponses sont de deux jours ouvrés maximum.
+sav2 : Pour nous contacter veuillez nous envoyer un mail à
+no_size : Ce produit n'a pas encore de taille
+go_to_the_product_page : Aller à la page des produits
+shipping : Choisir un mode d'expédition
+command_empty : Vous n'avez pas de commande
+shipping_stripe : Expédition

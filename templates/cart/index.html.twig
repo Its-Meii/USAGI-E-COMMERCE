@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('quantity-input') }}
+   
+{% endblock %}
+{% block title %}Cart - USAGI
+{% endblock %}
+
+{% block body %}
+<div class="flex-cart">
+  <div class="cart-container">
+    {% if cart is empty %}
+      <h3 class="cart-empty">{{"cart_empty"|trans}}</h3>
+      <a class="link-to-products" href="{{path('app_all_product')}}" data-turbo="false" title="{{'go_to_the_product_page'|trans}}" role='link'>{{ "start_shopping"|trans }}</a>
+    {% else %}
+          <div class="detail-cart">
+            <div class="head-cart">
+              <h1>{{'your_cart'|trans}}</h1>
+              <h6 id="numberProduct">{{render(path('app_cart_quantity'))}} {{'products'|trans}}</h6>
+            </div>
+            <hr>
+            {% for cartItem in cart %}
+
+            <div class="product-cart">
+              <div class="product-info">
+                <a href="{{path('app_product',{slug : cartItem.product.slug})}}" title="{{cartItem.product.name}}" data-turbo="false"><img src="{{ asset('uploads/' ~ cartItem.product.photofront)}}" alt="{{cartItem.product.name}}">
+                </a>
+
+                <div class="product-details">
+                  <h6>{{cartItem.product.name}}</h6>
+                  <span>{{cartItem.size}}</span>
+                  <span>{{ (cartItem.product.price/100)| format_currency('EUR',locale= app.session.get('_locale'))}}</span>
+                </div>
+              </div>
+              <div class="product-form">
+                <form data-turbo-stream="true" action='{{path('app_cart_update',{id : cartItem.product.id})}}'>
+                  <button class="productQuantityMinus" data-turbo-stream="true" type="submit" title="{{'reduce_quantity'|trans}} {{cartItem.product.name}}">-</button>
+                  <input type="hidden" name="size" value="{{cartItem.size.id}}">
+                  <input type="hidden" name="token" value="{{ csrf_token('update-product-cart') }}">
+                  <input id="quantity{{cartItem.product.id}}" min="0" data-max="{{cartItem.product.quantity}}" name="quantity" value="{{ cartItem.quantity }}" type="number" class="productQuantity">
+                  <button class="productQuantityPlus" data-turbo-stream="true" type="submit" title="{{'increase_quantity'|trans}} {{cartItem.product.name}}">+</button>
+                </form>
+
+                <div class="delete-product-cart" data-turbo-stream="true">
+                  <form data-turbo-stream="true" action="{{path('app_cart_delete',{productId : cartItem.product.id, size : cartItem.size.id})}}">
+                    <input type="hidden" name="token" value="{{ csrf_token('delete-product-cart') }}">
+                    <button type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            <h6 class="back-to-shop">
+              <a href="{{path('app_home')}}" data-turbo="false">
+                <i class="fas fa-long-arrow-alt-left"></i> {{'back_to_shop'|trans}}</a>
+            </h6>
+          </div>
+          <div class="price-cart-container">
+              <h3>{{'summary'|trans}}</h3>
+              <hr>
+              <div class="cart-total-price">
+                <h5>Total</h5>
+                <span id="cartTotalPrice" data-turbo-stream="true">
+                  {% set totalPrice = render(path('app_cart_totalPrice')) %}
+                  {{(totalPrice/100)| format_currency('EUR',locale= app.session.get('_locale'))}}
+                </span>
+              </div>
+              <div class="buttons-cart">
+                <a href="{{path('app_cart_clear')}}" role="button" title="">{{'delete_cart'|trans}}</a>
+                <a href="{{path('app_checkout')}}" role="button" title="">{{'checkout'|trans}}</a>
+              </div>
+          </div>
+    {% endif %}
+  </div>
+  <div class="cart-more-product">
+      <h3>{{'don-t_forget_these'|trans}}</h3>
+      <ul class="cart-flex-container">
+      {% if products is defined %}
+        {% for product in products|slice(0,3) %}
+              <li class="productBox">
+                    <a href='{{path('app_product',{slug : product.slug})}}' title="{{product.name}}" data-turbo="false">
+                        <img src="{{ asset('uploads/' ~ product.photofront)}}" alt="{{product.name}} photo" class="productImg">
+                        <p class="productName">{{ (product.name)}}</p>
+                        {% if product.quantity == 0 %}
+                            <p>{{ "rupture_de_stock"|trans }}</p>
+                            {% else %}
+                            <p class="productPrice">{{ (product.price/100)| format_currency('EUR',locale= app.session.get('_locale'))}}</p>
+                        {% endif %}
+                      </a>
+                </li>          
+        {% endfor %}
+      {% endif %}
+      </ul>
+  </div>
+</div>
+{% endblock %}

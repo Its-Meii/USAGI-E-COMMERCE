@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'tout_les_produits'|trans}} - USAGI{% endblock %}
+
+{% block body %}   
+    {% if products %}
+    <h1>{{'tout_les_produits'|trans}}</h1>  
+        <form action="{{path('app_filter')}}" method="GET" class="filterForm">
+            <div>
+                <label for="orderBy">{{ "filtrer"|trans }}</label>
+                <select id="orderBy" name="orderBy">
+                    <option value="prix_croissant">{{ "prix_croissant"|trans }}</option>
+                    <option value="prix_decroissant">{{ "prix_decroissant"|trans }}</option>
+                </select>        
+            </div>
+            <div>
+                <input data-turbo="false" type="submit" value="{{ "appliquer"|trans }}">
+            </div>
+        </form>
+         <ul class="grid-container allProduct">
+            {% for product in products %}
+                <a href='{{path('app_product',{slug : product.slug})}}' title="{{product.name}}" data-turbo="false">
+                    <li class="productBox" data-aos="fade-up">
+                        <article>
+                            <img src="{{ asset('uploads/' ~ product.photofront)}}" alt="{{product.name}} photo" height='300' width='300' class="productImg">
+                            <p class="productName">{{ (product.name)}}</p>
+                            {% if product.quantity == 0 %}
+                            <p>{{ "rupture_de_stock"|trans }}</p>
+                            {% else %}   
+                            <p class="productPrice">{{ (product.price/100)| format_currency('EUR',locale= app.session.get('_locale'))}}</p>
+                            {% endif %}
+                        </article>
+                    </li>
+                </a>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <div>
+        <h4>{{ "aucun_produit_trouve"|trans }}</h4>
+    </div>
+    {% endif %}
+{% endblock %}

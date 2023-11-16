@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Collection - {{tag.name}} - USAGI{% endblock %}
+
+{% block body %}   
+    {% if products %}
+    <h1>{{tag.name}}</h1>
+        <ul class="grid-container">
+            {% for product in products %}
+                <a href='{{path('app_product',{slug : product.slug})}}' title="{{product.name}}" data-turbo="false">
+                <li class="productBox" data-aos="fade-up">
+                    <article>
+                        <img class="productImg" src="{{ asset('uploads/' ~ product.photo_front)}}" alt="{{product.name}} photo" height='300' width='300'>
+                        <p class="productName">{{ (product.name)}}</p>        
+                        {% if product.quantity == 0 %}
+                            <p>{{ "rupture_de_stock"|trans }}</p>
+                        {% else %}   
+                            <p class="productPrice">{{ (product.price/100)| format_currency('EUR',locale= app.session.get('_locale'))}}</p>
+                        {% endif %}
+                    </article>
+                </li>
+                </a>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <div class="grid-center">
+        <h4>{{ "aucun_produit_trouve"|trans }}</h4>
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	{% if message == 'success' %}
+		{{ "commande_reussie"|trans }}
+		- USAGI
+	{% else %}
+		{{ "commande_annule"|trans }}
+		- USAGI
+	{% endif %}
+{% endblock %}
+{% block body %}
+	<div class="grid-center">
+		{% if message == 'success' %}
+			<h1>🎉{{ "commande_reussie"|trans }}🎉</h1>
+		{% else %}
+			<h1>😰{{ "commande_annule"|trans }}😰</h1>
+		{% endif %}
+	</div>
+	<section class="user-order_product-container">
+		<h2>{{'order_details'|trans}}</h2>
+		<h3>{{'order'|trans}} nº{{order.id}}<h3>
+		<ul class="user-order_product-list">
+			{% for item in order_lines %}
+				{% if item.productImg is defined %}
+					<li class="product-order__order">
+						<a href="{{path('app_product',{slug : item.productSlug})}}" data-turbo='false'>
+							<div class="product-order-img">
+								<img src="{{ asset('uploads/' ~ item.productImg)}}" alt="{{item.productName}} photo">
+							</div>
+							<article class="product-order">
+								<div class="product-order-description">
+									<h3>{{item.productName}}</h3>
+									<span class="product-order-price">{{(item.subTotal/100)| format_currency('EUR',locale= app.session.get('_locale'))}}</span>
+									<span class="product-order-size">{{item.size}}</span>
+								</div>
+								<span class="product-order-quantity">X {{item.quantity}}</span>
+							</article>
+						</a>
+					</li>
+				{% else %}
+				<li class="product-order__order">
+					<div class="product-order-img">
+						<svg version="1.1" viewbox="0 0 32 32" class="svg-icon svg-fill">
+							<path pid="0" fill-rule="evenodd" clip-rule="evenodd" d="M7.554 28.023l14.57-25.347 2.312 1.33-14.57 25.346-2.312-1.33zM13.069 26.667h14.266a2 2 0 002-2V7.334a2 2 0 00-2-2h-1.987l-1.535 2.667h2.855v16H14.604l-1.535 2.666zm4.276-18.666H5.335v16h2.8L6.6 26.667H4.668a2 2 0 01-2-2V7.334a2 2 0 012-2H18.88l-1.535 2.667z" fill="#A6A6A6"></path>
+							<circle pid="1" cx="9" cy="12" r="2" fill="#A6A6A6"></circle>
+							<path pid="2" fill-rule="evenodd" clip-rule="evenodd" d="M15.755 22H25v-2l-3-5-3 5-1.513-1.009L15.755 22zm-3.177-5.719L7 20v2h2.286l3.292-5.719z" fill="#A6A6A6"></path>
+						</svg>
+					</div>
+					<article class="product-order">
+						<div class="product-order-description">
+							<span class="product-order-price">{{(item.subTotal/100)| format_currency('EUR',locale= app.session.get('_locale'))}}</span>
+						</div>
+							<span class="product-order-quantity">{{item.quantity}}</span>
+					</article>
+				</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</section>
+{% endblock %}

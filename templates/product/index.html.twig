@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('quantity-input') }}
+   
+{% endblock %}
+{% block title %}{{product.name}} - USAGI{% endblock %}
+
+{% block body %}
+<article class="productMain">
+		<div class="productImgBox">
+			<img class="productImg" src="{{ asset('uploads/' ~ product.photofront)}}" alt="{{product.name}} photo" height='300' width='300'>
+			<img class="productImg" src="{{ asset('uploads/' ~ product.photoback)}}" alt="{{product.name}} photo" height='300' width='300'>
+		</div>
+			<div class="productForm">
+				<h1 class="productName">{{product.name}}</h1>
+				<span class="productPrice">{{ (product.price/100)| format_currency('EUR',locale= app.session.get('_locale'))}}</span>
+				<span class="product-taxes">{{ "taxes"|trans }}</span>
+				{% if product.quantity == 0 %}
+				<div class="sold-out-container">
+					<span class="sold-out">{{ "rupture_de_stock"|trans }}</span>
+				</div>
+				{% else %}
+				<form data-turbo-stream="true" action="{{path('app_cart_add',{id : product.id})}}" method="GET">			
+						{% set sizes = product.productSizes %}
+						<div class="form-row">
+					
+						{% if sizes|length == 0 %}
+							<span>{{'no_size'|trans}}</span>
+						{% else %}
+							<label for="size">Size</label>
+							<select class="productSize" name="size" id="size">
+							{% for size in sizes %}
+								<option value="{{size.id}}">{{size}}</option>
+							{% endfor %}
+							</select>				
+						{% endif %}	
+						</div>
+						<div class="form-row">
+							<label for="quantity{{product.id}}">{{ "quantite"|trans }}</label>
+							<div class="quantity-input">
+								<button class="productQuantityMinus" type="button" title="{{'reduce_quantity'|trans}} {{product.name}}">-</button>
+								<input class="productQuantity" type="number" id="quantity{{product.id}}" name="quantity" min="0" data-max="{{product.quantity}}" value="1"/>
+								<button class="productQuantityPlus" type="button" title="{{'increase_quantity'|trans}} {{product.name}}">+</button>
+							</div>
+						</div>
+						
+						{% if product.quantity < 10 %}
+							<span>{{ "low_stock"|trans }}</span>
+						{% endif %}
+						<input type="hidden" name="token" value="{{ csrf_token('add-product-cart') }}">
+						<input id="btn{{product.id}}" type="submit" data-turbo-stream="true" data-product="{{product.id}}" class="addCartButton" value="{{ "ajouter_panier"|trans }}">
+				</form>
+				{% endif %}		
+				<p class="productDescription"><strong>Description</strong><br>
+				{{product.description}}</p>
+			</div>
+</article>
+{% endblock %}

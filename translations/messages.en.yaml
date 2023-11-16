@@ -1,0 +1,87 @@
+connexion : Log in
+deconnexion: Log out
+inscription : Create account
+ajouter_panier: Add to cart
+rechercher: Search
+menu: Home
+produits: All Products
+panier: Cart
+filtrer: Sort by
+prix_croissant: Price low to high
+prix_decroissant: Price high to low 
+appliquer: Apply
+modifier: Edit
+quantite: Quantity
+aucun_produit_trouve: No product found...
+commande_annule: Cancelled order
+commande_reussie: Order successful
+tout_les_produits: All the product
+les_5_derniers_produits : The last 5 products
+rupture_de_stock : Sold out
+information : Information
+cgv : Terms of Sales
+mentions: Legal Notice
+politique_de_confidentialite : Privacy Policy
+conditions : Terms of use
+remboursement : Refund Policy
+creer : Create
+email : Email
+prenom : Firstname 
+nom : Lastname 
+telephone : Phone
+password : Password
+last_password : Last password
+new_password : New password
+repeat_password : Repeat password
+repeat_new_password : Repeat new password
+agree_terms : Agree terms
+message_terms : You should agree to our terms.
+message_password : Please enter a password.
+message_password_size : Your password should be at least 6 characters.
+message_repeat_password : The password fields must match.
+se_connecter : Login
+confirm : CONFIRM
+error_password_empty : The presented password cannot be empty.
+error_password_incorrect : The password presented is not valid.
+error_login : Bad credentials.
+required : Required field
+new_customer : You are a new customer ? Sign up !
+go_to_home : Go to the home page
+low_stock : Low stock - Last chance !
+taxes: Taxes included.
+start_shopping: Start shopping
+cart_empty : YOUR CART IS EMPTY
+order_history : Order history
+change_password : Change your password
+your_cart : YOUR CART
+products : product(s)
+back_to_shop : Back to shop
+summary : SUMMARY
+delete_cart : DELETE CART
+checkout : CHECK OUT
+error_same_password : The new password is equal to the old one.
+error_last_password : The last password is false.
+success_password : Your password has been changed.
+history: Your history
+order : Order
+show_details : show details
+hello : Hello
+order_paid : Command paid
+command_failed : Command failed
+don-t_forget_these: Don't forget these...
+save_my_address : Save my address
+send : Send
+order_details : Details of the order
+error : Error
+go_to_the_home_page: Go to the home page
+increase_quantity : Increase the quantity of
+reduce_quantity : Reduce the quantity of
+stats : The stats
+ca : Monthly sales revenue in €
+sav : After-sales support is open Monday to Friday and from 9 a.m. to 5 p.m. Our response times are two working days maximum.
+sav2 : To contact us please send us an email to
+no_size : This product has no size yet
+go_to_the_product_page : Go to the product page
+shipping : Choose a shipping
+command_empty : You have no order
+shipping_stripe : Shipping

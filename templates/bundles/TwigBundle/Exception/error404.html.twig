@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'error'|trans}} 404 - USAGI{% endblock %}
+
+{% block body %}
+
+<div class="grid-center">
+    <h1>{{'error'|trans}} 404</h1>
+    <a href="{{path('app_home')}}" data-turbo="false" title="{{'go_to_the_home_page'|trans}}">{{'menu'|trans}}</a>
+</div>
+{% endblock %}

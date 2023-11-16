@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{% if app.user %}
+		{{ encore_entry_script_tags('api') }}
+	{% endif %}
+
+{% endblock %}
+
+{% block title %}Checkout - USAGI
+{% endblock %}
+
+{% block body %}
+	{% if app.user %}
+		{% set userName = app.user.firstname ~' '~ app.user.lastname|upper %}
+		<div class='CheckoutForm grid-center'>
+			<h1>Checkout</h1>
+			{{ form_start(form,{'attr': {'id': 'formCheckout'}}) }}
+			{{ form_row(form.name,{
+                    'attr':{
+                        'value': userName
+                    }
+                }) }}
+			{{ form_row(form.email,{
+                    'attr':{
+                        'value': app.user.email,
+                    }
+                }) }}
+			{{ form_row(form.phone,{
+                    'attr':{
+                        'value': app.user.phone,
+                    }
+                }) }}
+			{% if app.user.address is defined %}
+				{{ form_row(form.address,{
+                            'attr':{
+                                'value': app.user.address,
+                                'list': 'cities',
+                            }
+                        }) }}
+			{% else %}
+				{{ form_row(form.address,{
+                            'attr':{
+                                'list': 'cities',
+                            }
+                        })}}
+			{% endif %}
+
+			{% if app.user.city is defined %}
+				{{ form_row(form.city,{
+                        'attr':{    
+                            'value': app.user.city,
+                        }
+                    }) }}
+			{% else %}
+				{{ form_row(form.city)}}
+			{% endif %}
+			{% if app.user.zipcode is defined %}
+				{{ form_row(form.zipcode,{
+                            'attr':{
+                                'value': app.user.zipcode,
+                            }
+                        }) }}
+			{% else %}
+				{{ form_row(form.zipcode)}}
+			{% endif %}
+			<div>
+				<label for="shipping-select">{{'shipping'|trans}}</label>
+				<select name="shipping" id="shipping-select">
+					{% for shipping in shippings %}	
+						<option value="{{shipping.id}}">{{shipping.name}}
+							{{(shipping.price/100)| format_currency('EUR',locale= app.session.get('_locale'))}}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div>
+				<label for="register">{{'save_my_address'|trans}}</label>
+				<input type="checkbox" id="register" name="register" title="{{'save_my_address'|trans}}">
+			</div>
+			<button data-turbo="false" class="checkout-button" type="submit">{{'confirm'|trans}}</button>
+			{{ form_end(form) }}
+		{% else %}
+            <div class="grid-center">
+			{% if app.session.get('_locale') == 'fr'%}
+				
+					<p class="login-message">Vous devez vous
+						<a href="{{path('app_login')}}" title="Aller à la page se connecter" role="link">connecter</a>
+						ou
+						<a href="{{path('app_register')}}" title="Aller à la page créer un compte" role="link">créer un compte</a>
+						pour continuer.</p>
+				{% else %}
+					<p class="login-message">You must
+						<a href="{{path('app_login')}}" title="Go to login page" role="link">log in</a>
+						or
+						<a href="{{path('app_register')}}" title="Go to the create an account page" role="link">create an account</a>
+						to continue.</p>		
+			{% endif %}
+            </div>
+		</div>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+framework:
+    default_locale: en
+    translator:
+        default_path: '%kernel.project_dir%/translations'
+        fallbacks:
+            - en
+            
+a2lix_translation_form:
+    locale_provider: default       # [1]
+    locales: [en, fr]      # [1-a]
+    default_locale: en             # [1-b]
+    required_locales: [fr ,en]         # [1-c]
+    templating: "@A2lixTranslationForm/bootstrap_5_layout.html.twig"      # [2]
+#        providers:
+#            crowdin:
+#                dsn: '%env(CROWDIN_DSN)%'
+#            loco:
+#                dsn: '%env(LOCO_DSN)%'
+#            lokalise:
+#                dsn: '%env(LOKALISE_DSN)%'

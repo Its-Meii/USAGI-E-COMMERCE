@@ -1,0 +1,53 @@
+ <section class="head" id="publicHeader">
+        <header>
+            	<a href="{{path('app_home')}}" data-turbo="false" class="logo" role="logo"><img src="{{ asset('assets/' ~ 'usagi.png')}}" alt="Usagi logo" width="80" role="logo" 
+				title="{{'go_to_the_home_page'|trans}}"/></a>
+
+				<div class="menu">
+					<input type='checkbox' class="toggle-menu">
+					<div class="hamburger"></div>
+					
+                	<ul class="navigation" role="navigation">
+                    <li><a href="{{path('app_all_product')}}" role="link" data-turbo="false">{{ "produits"|trans }}</a></li>
+					<li>
+						<div class="dropdown">
+						<button class="dropbtn">Collections&nbsp;<i class="fa-solid fa-chevron-down"></i></button>
+						<div class="dropdown-content">
+							<ul>
+								{{render(controller('App\\Controller\\TagController::getTags')) }}
+							</ul>
+						</div>
+					</div>
+					</li>
+                    <li><a href="{{path('app_cart')}}" role="link" data-turbo="false"><i style="width:24px; height:24px;" class="fa-solid fa-cart-shopping"></i>
+							{{ "panier"|trans }}
+							<sup id='cartQuantity'>
+								{{render(path('app_cart_quantity'))}}
+							</sup></a></li>
+                    {% if app.user %}
+							<li><a href="{{path('app_profile')}}" role="link" data-turbo="false">
+							<i class="fa-solid fa-user"></i>
+								{{app.user.firstname|capitalize}}
+							</a></li>
+							{% if 'ROLE_ADMIN' in app.user.getRoles() %}
+								<li><a href="{{path('admin')}}" role="link" target='_blank' data-turbo="false">
+									Admin page
+								</a></li>
+							{% endif %}
+						{% else %}
+							<li><a href="{{path('app_login')}}" role="link" data-turbo="false">
+								<i class="fa-solid fa-user"></i>
+								{{ "connexion"|trans }}
+							</a></li>
+						{% endif %}
+                    <li>
+						<ul class="langueListe">
+							   <li><a data-turbo='false' href='{{path('set_local',{local : 'en'})}}' role="button">EN</a></li>
+							   |
+							   <li><a data-turbo='false' href='{{path('set_local',{local : 'fr'})}}' role="button">FR</a></li>
+						</ul>
+					</li> 
+                	</ul>
+				</div>            
+        </header>
+    </section>

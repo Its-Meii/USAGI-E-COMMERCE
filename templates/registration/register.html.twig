@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ "inscription"|trans }} - USAGI{% endblock %}
+
+{% block body %}
+        <div class='registerForm grid-center h-80vh'>
+            <div class='grid-center'>
+            <h1>{{ "inscription"|trans }}</h1>
+            {% if message is defined %}
+                {% if message == 'success' %}
+                    <span>Votre compte a été créé</span>
+                {% endif %}
+            {% endif %}
+            {{ form_start(registrationForm) }}
+
+                {{ form_row(registrationForm.firstname,{
+                    label: "prenom"|trans
+                }) }}
+                {{ form_row(registrationForm.lastname, {
+                    label: "nom"|trans 
+                }) }}
+                {{ form_row(registrationForm.email, {
+                    placeholder : 'name@exemple.com',
+                    label:  "email"|trans 
+                }) }}
+                {{ form_row(registrationForm.phone, {
+                    label: "telephone"|trans
+                }) }}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: "password"|trans
+                }) }}
+                {{ form_row(registrationForm.agreeTerms, {
+                    label: "agree_terms"|trans,
+                    role: "checkbox"
+                }) }}
+                <input type="hidden" name="token" value="{{ csrf_token('register-user') }}">
+                <button type="submit" role="button" title='{{ "creer"|trans }}' data-turbo="false">{{ "creer"|trans }}</button>
+            {{ form_end(registrationForm) }}
+            </div>
+        </div>
+{% endblock %}

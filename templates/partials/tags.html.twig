@@ -1,0 +1,3 @@
+ {% for tag in tags %}
+    <li><a href="{{path('app_tag_show',{slug : tag.slug})}}" data-turbo="false">{{tag.name}}</a></li>
+{% endfor %}
